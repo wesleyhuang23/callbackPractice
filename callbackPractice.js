@@ -92,9 +92,10 @@ multiply(4, 3, function(answer){
   function contains(arr, str, cb){
     for(var i = 0; i < arr.length; i++){
     	if(arr[i] === str){
-    		return cb(true);
+    		cb(true);
     	}
     }
+    return false;
   }
 
 contains(names, 'Colt', function(result){
@@ -117,9 +118,14 @@ contains(names, 'Colt', function(result){
     //Code Here for uniq
 
     function uniq(arr, cb){
-      arr.splice(0, 1);
-      arr.splice(1, 1);
-      return cb(arr);
+     for(var i = 0; i < arr.length; i++){
+     	for(var x = 0; x < arr.length; i++){
+     		if(arr[i] === arr[x + 1]){
+     			delete arr[i];
+     	}
+      }
+     }
+     cb(arr);
     }
 
 uniq(names, function(uniqArr){
@@ -138,11 +144,13 @@ uniq(names, function(uniqArr){
     //Code Here for each
 
     function each(arr, cb){
-
+      for(var i = 0; i < arr.length; i++){
+        cb(arr[i], i);
+      }
     }
 
 each(names, function(item, indice){
-  console.log('The item in the ' + indice + ' position is ' + item)
+  console.log('The item in the ' + indice + ' position is ' + item);
 });
 
 
